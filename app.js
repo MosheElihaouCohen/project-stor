@@ -1,1 +1,1 @@
-console.log('halo world');
+alert("Welcome to College Store.");
