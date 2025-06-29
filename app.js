@@ -3,7 +3,8 @@ const chalk = require('chalk');
 const app = express();
 const PORT = 3000;
 const path = require('path');
-const HomeController = require('./controllers/Home')
+const HomeController = require('./controllers/Home');
+const ContectsController= require('./controllers/Contects');
 const ProductConroller = require('./controllers/Product');
 
 // HTTP -> GET, POST, DELETE , PUT
@@ -14,8 +15,9 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // Homepage
 app.get('/', HomeController.mainPage);
+app.get('/contact', ContectsController.formContenct);
 
-app.get('/products', ProductConroller.showProducts);
+// app.get('/products', ProductConroller.showProducts);
 
 
 
