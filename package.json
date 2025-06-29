@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/web-master-college/College-Online-Store/issues"
   },
-  "homepage": "https://github.com/web-master-college/College-Online-Store#readme"
+  "homepage": "https://github.com/web-master-college/College-Online-Store#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
 }
