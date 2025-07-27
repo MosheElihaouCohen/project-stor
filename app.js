@@ -6,6 +6,7 @@ const path = require('path');
 const HomeController = require('./controllers/Home');
 const ContectsController= require('./controllers/Contects');
 const ProductConroller = require('./controllers/Product');
+const {sequelize} = require('./utils/database');
 
 // HTTP -> GET, POST, DELETE , PUT
 
@@ -24,4 +25,6 @@ app.get('/contact', ContectsController.formContenct);
 
 app.listen(PORT, function(){
     console.log(chalk.magenta('Server is running!'));
+
+    
 });
