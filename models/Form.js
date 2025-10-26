@@ -21,6 +21,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
             field: 'is_call_back'
+        },
+        createdAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
+            field: 'created_at'
+        },
+        updatedAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
+            field: 'updated_at'
         }
     })
 

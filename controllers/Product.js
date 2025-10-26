@@ -1,5 +1,10 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/database");
+
+
+const ProductPage = async (request, response) =>{
+    
+        response.render('product-details');
+}
+
 
 const showProducts = (request, response) =>{
     response.write('This is products page!');
@@ -8,28 +13,8 @@ const showProducts = (request, response) =>{
 
 
 
-/*module.exports = {
+module.exports = {
+    ProductPage,
     showProducts
-}*/
-
-module.exports = (sequelize,DataTypes) => {
-    const Product = sequelize.define('Prodect',{
-        id:{
-            autoIncrement:true,
-            primaryKey:true,
-            type:DataTypes.INTEGER
-        },
-        name:{
-            allowNull:false,
-            type:DataTypes.STRING
-        },
-          description:{
-            type:DataTypes.TEXT
-          },
-        price:{
-            allowNull:null,
-             type:DataTypes.STRING
-        }
-    })
-    return Product;
 }
+
