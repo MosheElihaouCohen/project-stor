@@ -6,6 +6,7 @@ const path = require('path');
 const HomePageRoutes = require('./routes/Home');
 const ProductRoutes = require('./routes/Product');
 const ApiRoutes = require('./routes/Api');
+const authRoutes = require('./routes/Users')
 const {sequelize} = require('./models');
 // products
 
@@ -21,7 +22,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use('/product', ProductRoutes);
 app.use(HomePageRoutes);
 app.use('/api', ApiRoutes);
-
+app.use('/auth',authRoutes);
 // Homepage
 // app.get('/', HomeController.homePage);
 
