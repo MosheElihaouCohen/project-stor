@@ -1,6 +1,22 @@
 "use strict";
 
+const { response } = require("express");
+
 const contactFormMain = document.querySelector('#contact-form');
+const searchElement = document.querySelector('.search');
+//const searchButtonElement = document.querySelector('.btn-search');
+
+
+function searchItem(e){
+   e.preventDefault();
+   const valueSearch = searchElement.value;
+   const query = new URLSearchParams({ search: valueSearch }).toString();
+
+   fetch('/search?' + query)
+   .then(response => response.json())
+
+}
+
 function onSubmitForm(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -19,6 +35,7 @@ function onSubmitForm(event) {
   });
 
 }
+
 if(contactFormMain) {
   contactFormMain.addEventListener('submit', onSubmitForm);
 }
