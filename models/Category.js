@@ -8,11 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             allowNull: false,
             type: DataTypes.STRING
-        },  }
+        }
+    },{
+        tableName: 'categories',
+        timestamp: false
+    })
 
-    )
-
-    
+    // Category.associate = (models) => {
+    // };
 
     return Category;
 }

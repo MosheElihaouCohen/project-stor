@@ -1,6 +1,27 @@
 "use strict";
 
-const { response } = require("express");
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') { // Remove leading spaces
+      c = c.substring(1, c.length);
+    }
+    if (c.indexOf(nameEQ) === 0) { // Check if this cookie starts with the desired name
+      return c.substring(nameEQ.length, c.length); // Return the cookie's value
+    }
+  }
+  return null; // Return null if the cookie is not found
+}
+
 
 const contactFormMain = document.querySelector('#contact-form');
 const searchElement = document.querySelector('.search');
@@ -885,3 +906,70 @@ const sendEmail = () => {
       );
     });
 };
+
+const signUpForm = document.getElementById('sign-up-form');
+
+function onSubmitSignUpForm(event){
+        event.preventDefault();
+        const name = signUpForm.querySelector('input[name=name]');
+        const email = signUpForm.querySelector('input[name=email]');
+        const password = signUpForm.querySelector('input[name=password]');
+        const confirmPassword = signUpForm.querySelector('input[name=confirmPassword]');
+        let isError = false;
+       
+        if(name && name.value.trim() === ''){
+          notifyMessage('name can not be empty')
+          isError = true;
+        }
+
+        if(email && email.value.trim() === ''){
+          notifyMessage('Email can not be empty')
+          isError = true;
+
+        }
+        if(password && password.value.trim() === ''){
+          notifyMessage('password can not be empty')
+          isError = true;
+
+        }
+
+        if(confirmPassword && confirmPassword.value.trim() === ''){
+          notifyMessage('confirm password can not be empty')
+          isError = true;
+
+        }
+
+
+        if(confirmPassword.value !== password.value){
+          notifyMessage('passwords do not match');
+          isError = true;
+
+        }
+
+        if(isError){
+          return false;
+        }
+
+        this.submit();
+}
+
+if(signUpForm){
+  signUpForm.addEventListener('submit', onSubmitSignUpForm);
+}
+
+
+function onLoadPage(){
+    const signup = getCookie('signup');
+    if(signup){
+
+      const decodedCookieSignUp = decodeURIComponent(signup);
+      const signupObject = JSON.parse(decodedCookieSignUp);
+      // {status: true, message: '', action: 'signup'}
+
+      if(signupObject && signupObject.status && signupObject.action === 'signup'){
+        notifyMessage(signupObject.message);
+      }
+      setCookie('signup', null , 0);
+    }
+}
+document.addEventListener('DOMContentLoaded', onLoadPage)

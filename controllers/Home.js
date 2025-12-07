@@ -1,11 +1,10 @@
-const {Product, ProductImages} = require('../models');
+    const {Product, ProductImages} = require('../models');
 
 
 
 const homePage = async (request, response) =>{
     try{
-
-    
+        
     const productsData = await Product.findAll({
         raw: true,
         include: [{model: ProductImages, required: false, attributes: ['url'], as: 'images'}]
@@ -15,7 +14,7 @@ const homePage = async (request, response) =>{
         url: p['images.url']
     }))
 
-    console.log('products', products);
+
 
     response.render('Home', {
         title: 'Ivory Store Homepage',
@@ -29,21 +28,6 @@ const homePage = async (request, response) =>{
 
 const contactUsPage = (request, response) =>{
       response.render('contact-us');
-    // const fullName = request.query.fullName;
-    // const phone = request.query.phone;
-    // const email = request.query.email;
-    // const message = request.query.message;
-    // if(fullName){
-    //     response.render('Thank-you-page',{
-    //         title: 'We got your message',
-    //         fullName,
-    //         phone,
-    //         email,
-    //         message
-    //     })
-    // }else{
-      
-    // }
 }
 
 const contactUsPageAPI = (request, response) =>{
